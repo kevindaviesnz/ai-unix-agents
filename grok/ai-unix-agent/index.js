@@ -1,4 +1,3 @@
-```javascript
 // index.js (Main entry point)
 const { runAgent } = require('./agent');
 const yargs = require('yargs/yargs');

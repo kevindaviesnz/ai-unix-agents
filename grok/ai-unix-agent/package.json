@@ -1,0 +1,16 @@
+{
+  "name": "ai-unix-agent",
+  "version": "1.0.0",
+  "description": "Project: AI-Orchestrated Unix Command Agent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "openai": "^6.22.0",
+    "yargs": "^18.0.0"
+  }
+}

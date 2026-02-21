@@ -1,0 +1,19 @@
+{
+  "name": "ai-unix-log-agent-dual",
+  "version": "1.0.0",
+  "description": "Agentic Node.js: Unix commands as AI tools (OpenAI + Gemini)",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:openai": "API_PROVIDER=openai node src/index.js",
+    "start:gemini": "API_PROVIDER=gemini node src/index.js",
+    "dev": "NODE_ENV=development node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.0",
+    "openai": "^4.0.0",
+    "@google/generative-ai": "^0.12.0",
+    "yargs": "^17.7.2"
+  }
+}
