@@ -1,0 +1,27 @@
+{
+  "name": "devops-agent",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@langchain/core": "^1.1.26",
+    "@langchain/openai": "^1.2.8",
+    "dotenv": "^17.3.1",
+    "execa": "^9.6.1",
+    "inquirer": "^13.2.5",
+    "langchain": "^1.2.25",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^25.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

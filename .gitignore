@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+anthropic/unix-ai-agent/node_modules
+gemini/devops-agent/node_modules
+
+
+# Environment variables — never commit real keys
+.env
+anthropic/unix-ai-agent/.env
+gemini/devops-agent/.env
+
+# Output reports
+report.txt
+*.report.txt
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
