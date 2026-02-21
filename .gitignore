@@ -2,12 +2,15 @@
 node_modules/
 anthropic/unix-ai-agent/node_modules
 gemini/devops-agent/node_modules
+grok/unix-ai-agent/node_modules
 
 
 # Environment variables — never commit real keys
 .env
 anthropic/unix-ai-agent/.env
 gemini/devops-agent/.env
+grok/unix-ai-agent/.env
+
 
 # Output reports
 report.txt
