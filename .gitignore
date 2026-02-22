@@ -3,7 +3,7 @@ node_modules/
 anthropic/unix-ai-agent/node_modules
 gemini/devops-agent/node_modules
 grok/unix-ai-agent/node_modules
-perplexity/ai-unix-log-agent/node_modules
+perplexity/ai-log-agent/node_modules
 
 
 # Environment variables — never commit real keys
@@ -11,7 +11,7 @@ perplexity/ai-unix-log-agent/node_modules
 anthropic/unix-ai-agent/.env
 gemini/devops-agent/.env
 grok/unix-ai-agent/.env
-perplexity/ai-unix-log-agent/.env
+perplexity/ai-log-agent/.env
 
 
 # Output reports
