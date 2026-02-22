@@ -3,10 +3,6 @@
 **"Precision Prompts + Atomic Debugging = Production Velocity"**  
 *For AI-Powered Unix Command Orchestration Projects*
 
-```
-Traditional: $35k NZD + 3 months → Fragile prototype
-This Method: $300 NZD + 2 hours → Production-ready agent
-```
 
 ## 🎯 Core Methodology (6-Step Cycle)
 
