@@ -1,32 +1,29 @@
-import { ChatOpenAI } from '@langchain/openai';
-import Anthropic from '@anthropic-ai/sdk';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+// src/llm.js - Fixed for all providers including Gemini
 import dotenv from 'dotenv';
 dotenv.config();
 
-export function getLLM() {
-  const provider = process.env.LLM_PROVIDER || 'openai';  // 'openai', 'anthropic', 'gemini'
-  const model = process.env.LLM_MODEL || 'gpt-4o-mini';
+import { ChatOpenAI } from '@langchain/openai';
+import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-  const systemPrompt = `You are a Unix log analysis expert using ONLY these tools: grep,awk,find,sort,uniq,wc,df,ps,head,tail,cat.
-  Goal: {goal}. Follow ReAct: Reason → run_unix → Observe → repeat. Say "ANALYSIS COMPLETE" when done.`;
+export function getLLM() {
+  const provider = process.env.LLM_PROVIDER || 'openai';
 
   if (provider === 'openai') {
     return new ChatOpenAI({ 
-      model: model === 'gemini' ? 'gpt-4o-mini' : model, 
+      model: process.env.LLM_MODEL || 'gpt-4o-mini', 
       temperature: 0.1 
     });
   } 
   else if (provider === 'anthropic') {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     return {
-      invoke: async (msgs) => {
-        // Simplified tool calling wrapper for Anthropic
-        const msg = msgs[msgs.length - 1].content;
+      invoke: async (messages) => {
+        const lastMsg = messages[messages.length - 1];
         const response = await client.messages.create({
-          model: 'claude-3-5-sonnet-20241022',
+          model: process.env.LLM_MODEL || 'claude-3-5-sonnet-20241022',
           max_tokens: 1024,
-          messages: [{ role: 'user', content: systemPrompt.replace('{goal}', msg) }]
+          messages: [{ role: 'user', content: lastMsg.content }]
         });
         return { content: [{ type: 'text', text: response.content[0].text }] };
       }
@@ -34,24 +31,31 @@ export function getLLM() {
   } 
   else if (provider === 'gemini') {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-    const modelName = model || 'gemini-1.5-pro';
+    const modelName = process.env.LLM_MODEL || 'gemini-1.5-flash';
     
     return {
       invoke: async (messages) => {
+        // Convert OpenAI-style messages to Gemini format
+        const history = messages.slice(0, -1).map(msg => ({
+          role: msg.role === 'user' ? 'user' : msg.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: typeof msg.content === 'string' ? msg.content : String(msg.content) }]
+        }));
+
         const model = genAI.getGenerativeModel({ model: modelName });
         const chat = model.startChat({
-          history: messages.slice(0, -1),
+          history,
           generationConfig: { temperature: 0.1, maxOutputTokens: 1024 }
         });
         
         const result = await chat.sendMessage(messages[messages.length - 1].content);
-        return { content: [{ role: 'model', content: result.response.text() }] };
-      },
-      // Tool calling simulation for Gemini (function calling)
-      callTools: async (args) => {
-        return { tool_call_id: '1', args };  // Simplified for demo
+        return { 
+          content: [{ 
+            role: 'model', 
+            text: result.response.text() 
+          }] 
+        };
       }
     };
   }
-  throw new Error(`Unsupported provider: ${provider}. Use: openai, anthropic, gemini`);
+  throw new Error(`Unsupported provider: ${provider}`);
 }
