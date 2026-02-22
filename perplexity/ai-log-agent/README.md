@@ -194,18 +194,6 @@ $ npm start "Find top error IPs"
 2. 10.0.0.5 → 12 errors
 ```
 
-## 🌟 Why This Changes DevOps Forever
-
-```
-Manual: 30min scripting + testing + debugging
-Agent: 6s natural language → production insights
-
-Your natureandniche.co.nz server:
-"Find images >2MB causing CDN bills" → $500/mo savings
-"Optimize nginx slow logs" → 40% faster debugging  
-"Clean expired sessions" → 2GB RAM freed instantly
-```
-
 ## 🚀 Production Deployment
 
 ```bash
@@ -226,10 +214,6 @@ Unlimited? → "AI DevOps as a Service"
 ```
 
 ***
-
-**Built for Kevin D's natureandniche.co.nz**  
-**AI Sysadmin → Live in 2 minutes**  
-**From English query → Unix genius** 🚀
 
 ```
 npm start "Make my server faster"
